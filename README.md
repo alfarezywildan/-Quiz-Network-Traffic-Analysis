@@ -9,8 +9,7 @@
 | Wildan Alfarezy       | 5027251088 |
 | Muhammad Yusuf | 5027251067 |
 
-## Laporan
-### Soal Nomor 2
+## Laporan (Soal No 2)
 
 1. What is the IP and Port of the web server? 
 
