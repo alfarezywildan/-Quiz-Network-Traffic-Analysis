@@ -1,6 +1,8 @@
 # Quiz-Network-Traffic-Analysis
 
-## Member
+## Kelompok 15
+
+## Anggota
 
 | Nama                      | NRP        |
 | ------------------------- | ---------- |
@@ -8,6 +10,7 @@
 | Muhammad Yusuf | 5027251067 |
 
 ## Laporan
+### Soal Nomor 2
 
 1. What is the IP and Port of the web server? 
 
