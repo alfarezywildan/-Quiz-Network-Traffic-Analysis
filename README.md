@@ -64,7 +64,7 @@ gunakan filter `http.request.method == "DELETE"` setelah menggunakan filter kami
 
 ![alt text](assets/soal7_1.png)
 
-setelah mengetahui ID buku yang dihhapus kita gunakan filter `"id":3,"title"` untuk mencari title buku nya. 
+setelah mengetahui ID buku yang dihapus kita gunakan filter `"id":3,"title"` untuk mencari title buku nya. 
 
 ![alt text](assets/soal7_2.png)
 
