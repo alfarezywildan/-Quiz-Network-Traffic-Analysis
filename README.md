@@ -23,6 +23,19 @@ jadi suatu browser itu meminta halaman web, browser diwajibkan untuk mengirim in
 
 2. To help with viewing the server packets going in and out, what's a good filter to use and why? 
 
+Untuk melihat paket keluar dan masuk, kita bisa menggunakan filter `ip.addr == <ip>` kemudian jika ingin memfilter paket yang keluar saja bisa menggunakan `ip.src == <ip>`, lalu untuk paket yang masuk bisa menggunakan `ip.dst == <ip>`
+
+Paket dari ip `192.168.223.129` yang masuk dan juga keluar
+  ![alt text](assets/image.png)
+
+Paket yang masuk ke ip `192.168.223.129`
+  ![alt text](assets/image1.png)
+
+Paket yang keluar dari ip `192.168.223.129`
+  ![alt text](assets/image2.png)
+
+Filter yang sebaiknya digunakan adalah filter keluar atau masuk dari ip tertentu secara tersendiri, seperti `ip.dst == <ip>` atau `ip.src == <ip>`, kenapa tidak menggunakan `ip.addr == <ip>`, karena walaupun ip sudah terfilter, paket yang masuk dan keluar tetap terlihat, sehingga masih lumayan susah untuk mencari penyerang yang menyusupkan paket mencurigakan, Dengan filter keluar atau masuk, kita dapat melihat siapa yang mengirim ataupun siapa yang dikirim secara terpisah.
+
 3. Which user logged in on Sep 19, 2025 23:17:44 (GMT+7)?
 
 4. What time did one of the public computers got access to admin user? 
