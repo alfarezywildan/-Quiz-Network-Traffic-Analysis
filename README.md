@@ -46,6 +46,13 @@ masih di filter `http` cari paket dengan tulisan `POST /api/login` lalu kami `fo
 
 jadi dalam desain web modern ketika user mengisi form login dan menekan submit, browser akan mengirim username/password menggunakan metode `POST` karena metode ini menyembunyikan data di dalam body paket. Dengan melihat paket `POST` sebelum server mengembalikan respon kita bisa melihat data asli yang dikirim client.
 
+4. What time did one of the public computers got access to admin user?
+
+Jawaban: `Date: Fri, 19 Sep 2025 16:20:52 GMT`
+
+Setelah di filter menggunakan `http.request.method == "POST"` lalu saya follow HTTP Stream pada salah satu paket login, terlihat ada username dan password, dan juga terlihat waktunya `Date: Fri, 19 Sep 2025 16:20:52 GMT`
+![alt text](assets/image4.png)
+
 5. Which IP accessed the admin user?
 
 jawaban: 192.168.223.1
@@ -55,6 +62,13 @@ ini lanjutan nomer 4 yang dimana setelah mengetahui waktu komputer publik yang m
 ![alt text](assets/soal5.png)
 
 jadi paket jaringan itu selalu memiliki ip pengirim (source) dan ip penerima (destination). Karena aksi pengiriman data login yang berbahaya tersebut dikirim oleh penyerang menuju server, maka Source Address dari paket tersebut (192.168.223.1) adalah ip yang mengakses admin user. 
+
+6. How did the attacker gain access to the admin user?
+
+Jawaban: Attacker bisa mendapatkan akses ke admin user dengan menggunakan serangan SQL injection, yaitu dengan membypass login dengan cara memasukkan simbol/beberapa command sql database(payload), berikut isi dari hasil follow HTTP stream di salah satu paket filter `http.request.method == "POST"` dan ini adalah payload yang dipakai `{"username":"' or 1=1--","password":"a"}`
+
+SQL Injection
+![alt text](assets/image4.png)
 
 7. What book did the attacker delete?
 
@@ -72,6 +86,15 @@ lalu gunakan follow http steam untuk melihat title dari buku dengan ID 3 tersebu
 
 ![alt text](assets/soal7_3.png)
 
+8. The attacker added a new book to the database, what was it called?
+
+Jawaban: Buku yang berjudul "please fix your server" dengan author "love, W." dengan isbn "41" tahun "6767"dan dengan deskripsi "come on"
+
+Setelah kami cek menggunakan filter `http.request.method == "POST"`, ada salah satu paket `books`, ketika kami cek follow HTTP streamnya ternyata itu adalah buku yang ditambahkan ke database, ini adalah hasil HTTP streamnya `{"title":"please fix your server","author":"love, W.","isbn":"41","year":6767,"description":"come on","userId":1}`
+
+Hasil dari follow HTTP streamnya
+![alt text](image5.png)
+
 9. How did the attacker successfully leak all the usernames and passwords?
 
 jawaban: penyerang membocorkan data (username dan password leak) dengan menggunakan perintah UNION SELECT
@@ -85,3 +108,14 @@ lalu kami menggunakan follow http stream agar lebih jelas
 ![alt text](assets/soal9_2.png)
 
 dengan begitu kami mendapatkan info bahwa penyerang menggunakan Perintah UNION SELECT dalam database SQL berfungsi untuk menggabungkan hasil dari dua tabel yang berbeda. Penyerang memerintahkan database untuk mencari data buku kosong, lalu menggabungkannya (UNION) dengan data dari tabel users (tabel rahasia tempat password disimpan). Akibatnya, server dengan polosnya mengirimkan data username dan password ke layar penyerang, mengira itu adalah bagian dari daftar buku yang dicari.
+
+10. What was the password hash of admin account?
+
+Jawaban : "0192023a7bbd73250516f069df18b500"
+
+Setelah kami  coba follow HTTP stream di paket seperti no 9, yaitu `union select username password`
+lalu kami cari kata `admin` dan ditemukanlah password hash admin tersebut, di sebelah title `"title":"0192023a7bbd73250516f069df18b500"`
+
+![alt text](assets/image6.png)
+
+Link AI : https://chatgpt.com/share/6abe95de-b814-83ec-8605-7962b7378576
